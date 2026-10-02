@@ -758,6 +758,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTimelineMilestones();
     initPasswordToggle();
     updateUserNav();
+    initVideoAutoplay();
 
     // Page Specific Hooks
     if (document.querySelector('.cart-container')) {
@@ -773,6 +774,51 @@ document.addEventListener('DOMContentLoaded', () => {
         initAuthPageEnhancements();
     }
 });
+
+// Video Autoplay & Stream Enhancements
+function initVideoAutoplay() {
+    const videos = document.querySelectorAll('video');
+    if (!videos.length) return;
+
+    videos.forEach(video => {
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
+        video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', '');
+
+        const tryPlay = () => {
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // Browser policy blocked autoplay without touch; activate on first interaction
+                    const resumeOnInteraction = () => {
+                        video.play().catch(() => {});
+                        window.removeEventListener('touchstart', resumeOnInteraction);
+                        window.removeEventListener('click', resumeOnInteraction);
+                        window.removeEventListener('scroll', resumeOnInteraction);
+                    };
+                    window.addEventListener('touchstart', resumeOnInteraction, { once: true, passive: true });
+                    window.addEventListener('click', resumeOnInteraction, { once: true, passive: true });
+                    window.addEventListener('scroll', resumeOnInteraction, { once: true, passive: true });
+                });
+            }
+        };
+
+        if (video.readyState >= 2) {
+            tryPlay();
+        } else {
+            video.addEventListener('loadeddata', tryPlay, { once: true });
+            video.addEventListener('canplay', tryPlay, { once: true });
+        }
+    });
+
+    window.addEventListener('load', () => {
+        videos.forEach(v => {
+            if (v.paused) v.play().catch(() => {});
+        });
+    });
+}
 
 // Theme Management
 function initTheme() {
