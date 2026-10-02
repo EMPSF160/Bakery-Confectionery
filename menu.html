@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu | SafeCrust Co. - Allergy Friendly Treats</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-header {
+            padding: 10rem 0;
+            background: linear-gradient(rgba(27, 14, 10, 0.5), rgba(27, 14, 10, 0.5)), url('img/menu header.png');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            color: #ffffff !important;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9) !important;
+            max-width: 650px;
+            margin: 0 auto;
+            font-weight: 500;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                margin-bottom: 3.5rem;
+            }
+        }
+
+        .price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+
+        .filter-bar {
+            padding: 2.5rem 0;
+            background: var(--bg-main);
+            z-index: 900;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-chip {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            background: var(--bg-card);
+            color: var(--text-main);
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            font-size: 0.95rem;
+            min-width: 140px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+
+        .filter-chip:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .filter-chip.active {
+            background: var(--primary);
+            color: #1C1917;
+            font-weight: 700;
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px rgba(255, 196, 0, 0.45);
+        }
+
+        .filter-status-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .banner-offer {
+            background: linear-gradient(rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05));
+            padding: 1.5rem 2rem;
+            border-radius: var(--radius);
+            border: 1px dashed var(--secondary);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .safety-card {
+            background: var(--accent);
+            padding: 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        /* Center products in the last row when filtering */
+        .grid-3 {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .grid-3 .card {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            height: auto;
+        }
+
+        @media (min-width: 1025px) {
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .menu-card-body {
+            display: flex !important;
+            flex-direction: column !important;
+            flex: 1 !important;
+            padding: 1.5rem !important;
+            align-items: stretch !important;
+        }
+
+        .menu-card-body h3 {
+            margin-bottom: 0.5rem;
+            min-height: 2.8rem;
+            /* Ensure space for 2-line titles */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .menu-card-body p {
+            flex-grow: 1;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-price {
+            margin-top: auto !important;
+            margin-bottom: 1rem !important;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .popular-week-grid .card {
+            min-width: 0 !important;
+            width: auto !important;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Gifting Section Styles */
+        .artisan-gift-section {
+            background: var(--bg-card);
+            padding: 8rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .gift-banner {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 5rem;
+            align-items: center;
+            background: var(--accent);
+            border-radius: 30px;
+            padding: 4rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .gift-image {
+            max-width: 500px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .gift-image img {
+            width: 100%;
+            border-radius: 20px;
+            transform: scale(1.1);
+            transform-origin: center;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+
+        .gift-image:hover img {
+            transform: scale(1.15);
+        }
+
+        .gift-info {
+            text-align: left;
+        }
+
+        .gift-info .subheading {
+            color: var(--secondary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .gift-info h2 {
+            text-align: left !important;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .gift-info p {
+            text-align: left !important;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .gift-perks {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .perk {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .perk i {
+            color: var(--secondary);
+        }
+
+        @media (max-width: 1100px) {
+            .gift-banner {
+                padding: 3rem;
+                gap: 3rem;
+            }
+
+            .gift-info h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .gift-banner {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 2.5rem;
+            }
+
+            .gift-info,
+            .gift-info h2,
+            .gift-info p {
+                text-align: center !important;
+            }
+
+            .gift-perks {
+                justify-content: center;
+            }
+
+            .gift-image {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .perk {
+                justify-content: center;
+            }
+
+            .gift-info .btn-wrapper {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body class="menu-page">
+
+    <header class="header">
+        <div class="container nav-container">
+            <div class="mobile-nav-container">
+                <a href="index.html" class="logo"><i class="fas fa-cookie-bite"></i> SafeCrust Co.</a>
+                <button class="navbar-toggler" type="button" id="mobileMenuToggle" title="Open menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <nav>
+                <ul class="nav-links" id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="home-premium.html">Premium</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <button type="button" id="theme-toggle" class="toggle-btn" title="Toggle Theme"><i
+                        class="fas fa-moon"></i></button>
+                <button type="button" id="rtl-toggle" class="toggle-btn" title="Toggle RTL"><i
+                        class="fas fa-right-left"></i></button>
+                <button type="button" class="toggle-btn cart-btn" title="View Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge">0</span>
+                </button>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+            <div class="mobile-menu-header">
+                <h3>Menu</h3>
+                <button type="button" class="mobile-menu-close" id="mobileMenuClose" title="Close menu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <ul class="mobile-menu-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="home-premium.html">Premium</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+
+            <div class="mobile-menu-actions">
+                <button type="button" id="mobile-theme-toggle" class="btn btn-outline">
+                    <i class="fas fa-moon"></i> Theme
+                </button>
+                <button type="button" id="mobile-rtl-toggle" class="btn btn-outline">
+                    <i class="fas fa-right-left"></i> RTL
+                </button>
+                <a href="cart.html" class="btn btn-primary">Cart</a>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Backdrop -->
+        <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+    </header>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Bakery &amp; Confectionery Aggregator Catalog</h1>
+            <p>Order fresh from top certified allergen-free bakeries &amp; patisseries. 100% Celiac, Vegan &amp; Nut-Safe Guaranteed.
+            </p>
+        </div>
+    </div>
+
+    <div class="filter-bar">
+        <div class="container" style="display:flex; flex-direction:column; gap:1.25rem;">
+            <!-- Aggregator Search & Bakery Selector -->
+            <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; align-items:center;">
+                <div style="position:relative; flex:1; max-width:420px; min-width:240px;">
+                    <i class="fas fa-search" style="position:absolute; left:1rem; top:50%; transform:translateY(-50%); color:var(--text-muted);"></i>
+                    <input type="text" id="menu-search-input" placeholder="Search treats, ingredients, cakes, bakeries..." style="width:100%; padding:0.75rem 1rem 0.75rem 2.5rem; border-radius:30px; border:1px solid var(--border); background:var(--bg-card); color:var(--text-main); font-family:inherit;">
+                </div>
+                <div style="min-width:240px;">
+                    <select id="bakery-filter-select" style="width:100%; padding:0.75rem 1.25rem; border-radius:30px; border:1px solid var(--border); background:var(--bg-card); color:var(--text-main); font-family:inherit; font-weight:600; cursor:pointer;">
+                        <option value="all">🏪 All Bakery Partners (4)</option>
+                        <option value="Flourish Safe Bakes">Flourish Safe Bakes (GF)</option>
+                        <option value="Pure Bliss Patisserie">Pure Bliss Patisserie (Nut-Free)</option>
+                        <option value="Sweet Haven GF Bakery">Sweet Haven GF Bakery (Keto/Celiac)</option>
+                        <option value="Velvet Vegan Confections">Velvet Vegan Confections</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="filter-container">
+                <button type="button" class="filter-chip active" data-filter="all">All Confections</button>
+                <button type="button" class="filter-chip" data-filter="gluten-free">🌾 100% Gluten-Free</button>
+                <button type="button" class="filter-chip" data-filter="vegan">🌱 100% Vegan</button>
+                <button type="button" class="filter-chip" data-filter="nut-free">🥜 Peanut &amp; Nut-Free</button>
+                <button type="button" class="filter-chip" data-filter="sugar-free">🫐 Sugar-Free / Keto</button>
+                <button type="button" class="filter-chip" data-filter="dairy-free">🥛 Dairy-Free</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="container section">
+        <div class="banner-offer reveal">
+            <h3 style="color: var(--secondary); margin-bottom: 0.5rem;"><i class="fas fa-tag"></i> Multi-Bakery Bundle: Get 20% off with code SAFEBAKE20!</h3>
+            <p style="margin: 0; color: var(--text-muted);">Free Express 30-min Hot-Bake Delivery on orders over $35. Freshly sealed with tamper-evident allergen certification.</p>
+        </div>
+
+        <div class="filter-status-row">
+            <div style="font-weight: 600; color: var(--text-main); font-size: 0.95rem;">
+                <i class="fas fa-cookie-bite" style="color:var(--primary); margin-right:6px;"></i>
+                <span id="filter-result-count">Showing 18 safe treats</span>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center;">
+                <span class="tag tag-gf"><i class="fas fa-shield-check"></i> Celiac Tested</span>
+                <span class="tag tag-nf"><i class="fas fa-shield-virus"></i> Nut-Safe Zone</span>
+            </div>
+        </div>
+        <div class="grid grid-3" id="menu-products-grid">
+            <!-- Product 1 -->
+            <div class="card reveal" data-category="cakes" data-tags="gluten-free vegan dairy-free egg-free" data-bakery="Flourish Safe Bakes">
+                <img src="img/Double Chocolate Fudge.png" alt="Triple Chocolate Decadence">
+                <div class="card-body menu-card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-gf">Gluten-Free</span>
+                        <span class="tag tag-v">Vegan</span>
+                        <span class="tag tag-df">Dairy-Free</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--secondary); font-weight:700; margin-bottom:4px;"><i class="fas fa-store"></i> Flourish Safe Bakes</span>
+                    <h3>Triple Chocolate Decadence Cake</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Rich 3-layer Belgian cocoa cake with silky avocado dark chocolate ganache.</p>
+                    <div class="price menu-price">$28.50</div>
+                    <button type="button" class="btn btn-primary btn-customize-treat" data-product-id="p1" style="width: 100%;"><i class="fas fa-wand-magic-sparkles"></i> Customize &amp; Order</button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="card reveal" data-category="breads" data-tags="gluten-free vegan nut-free egg-free" data-bakery="Flourish Safe Bakes">
+                <img src="img/gf_artisan_loaf.png" alt="Artisan Sourdough Boule">
+                <div class="card-body menu-card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-gf">Gluten-Free</span>
+                        <span class="tag tag-nf">Nut-Free</span>
+                        <span class="tag tag-v">Vegan</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--secondary); font-weight:700; margin-bottom:4px;"><i class="fas fa-store"></i> Flourish Safe Bakes</span>
+                    <h3>Artisan Sourdough Boule (GF)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Naturally fermented with wild sourdough starter, golden crispy crust, 100% Celiac-safe.</p>
+                    <div class="price menu-price">$9.50</div>
+                    <button type="button" class="btn btn-primary btn-customize-treat" data-product-id="p2" style="width: 100%;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="card reveal" data-category="cakes" data-tags="gluten-free nut-free dairy-free" data-bakery="Pure Bliss Patisserie">
+                <img src="img/Lemon Drizzle Dream.png" alt="Lemon Drizzle Dream">
+                <div class="card-body menu-card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-gf">Gluten-Free</span>
+                        <span class="tag tag-nf">Nut-Free</span>
+                        <span class="tag tag-df">Dairy-Free</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--secondary); font-weight:700; margin-bottom:4px;"><i class="fas fa-store"></i> Pure Bliss Patisserie</span>
+                    <h3>Lemon Drizzle Cloud Dream</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Infused with organic Meyer lemons and candied zest, topped with a crisp botanical glaze.</p>
+                    <div class="price menu-price">$24.00</div>
+                    <button type="button" class="btn btn-primary btn-customize-treat" data-product-id="p3" style="width: 100%;"><i class="fas fa-wand-magic-sparkles"></i> Customize &amp; Order</button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="card reveal" data-category="pastries" data-tags="vegan dairy-free egg-free nut-free" data-bakery="Velvet Vegan Confections">
+                <img src="img/vegan_strawberry_glazed_donuts.png" alt="Strawberry Glazed Donuts">
+                <div class="card-body menu-card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-v">Vegan</span>
+                        <span class="tag tag-nf">Nut-Free</span>
+                        <span class="tag tag-df">Dairy-Free</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--secondary); font-weight:700; margin-bottom:4px;"><i class="fas fa-store"></i> Velvet Vegan Confections</span>
+                    <h3>Velvet Strawberry Glazed Donuts (4-Pk)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Baked artisan donuts smothered in fresh organic strawberry glaze made with real berries.</p>
+                    <div class="price menu-price">$16.00</div>
+                    <button type="button" class="btn btn-primary btn-customize-treat" data-product-id="p4" style="width: 100%;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="card reveal" data-category="cookies" data-tags="gluten-free vegan soy-free" data-bakery="Sweet Haven GF Bakery">
+                <img src="img/chocolate_chip_decadence_cookies.png" alt="Chocolate Chip Cookies">
+                <div class="card-body menu-card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-gf">Gluten-Free</span>
+                        <span class="tag tag-v">Vegan</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--secondary); font-weight:700; margin-bottom:4px;"><i class="fas fa-store"></i> Sweet Haven GF Bakery</span>
+                    <h3>Rich Dark Chocolate Chunk Cookies (6-Pk)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Chewy center with crispy golden edges packed with organic fair-trade dark chocolate chunks.</p>
+                    <div class="price menu-price">$14.50</div>
+                    <button type="button" class="btn btn-primary btn-customize-treat" data-product-id="p5" style="width: 100%;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="card reveal" data-category="cakes" data-tags="gluten-free sugar-free keto egg-free" data-bakery="Sweet Haven GF Bakery">
+                <img src="img/sugar_free_cheesecake.png" alt="Sugar Free Cheesecake">
+                <div class="card-body menu-card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-gf">Gluten-Free</span>
+                        <span class="tag tag-sf">Sugar-Free</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--secondary); font-weight:700; margin-bottom:4px;"><i class="fas fa-store"></i> Sweet Haven GF Bakery</span>
+                    <h3>Sugar-Free Keto NY Cheesecake</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Ultra creamy vanilla cheesecake on a toasted coconut crust, sweetened with monkfruit.</p>
+                    <div class="price menu-price">$29.00</div>
+                    <button type="button" class="btn btn-primary btn-customize-treat" data-product-id="p8" style="width: 100%;"><i class="fas fa-wand-magic-sparkles"></i> Customize &amp; Order</button>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="card reveal" data-category="breads" data-tags="gluten-free vegan nut-free" data-bakery="Flourish Safe Bakes">
+                <img src="img/Rosemary Focaccia.png" alt="Rosemary Focaccia">
+                <div class="card-body menu-card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-gf">Gluten-Free</span>
+                        <span class="tag tag-v">Vegan</span>
+                        <span class="tag tag-nf">Nut-Free</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--secondary); font-weight:700; margin-bottom:4px;"><i class="fas fa-store"></i> Flourish Safe Bakes</span>
+                    <h3>Rosemary Sea Salt Focaccia</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Drizzled with cold-pressed extra virgin olive oil, fresh organic rosemary, and flaky Maldon sea salt.</p>
+                    <div class="price menu-price">$11.00</div>
+                    <button type="button" class="btn btn-primary btn-customize-treat" data-product-id="p6" style="width: 100%;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="card reveal" data-category="pastries" data-tags="nut-free gluten-free vegan sugar-free" data-bakery="Pure Bliss Patisserie">
+                <img src="img/nut_free_sunbutter_bars.png" alt="SunButter Protein Bars">
+                <div class="card-body menu-card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-nf">Nut-Free</span>
+                        <span class="tag tag-gf">Gluten-Free</span>
+                        <span class="tag tag-sf">Sugar-Free</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--secondary); font-weight:700; margin-bottom:4px;"><i class="fas fa-store"></i> Pure Bliss Patisserie</span>
+                    <h3>SunButter Crisp Protein Bars (4-Pk)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Nut-free sunflower seed butter energy bars bound with sprouted quinoa crisps and organic dates.</p>
+                    <div class="price menu-price">$13.50</div>
+                    <button type="button" class="btn btn-primary btn-customize-treat" data-product-id="p7" style="width: 100%;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 9 -->
+            <div class="card reveal" data-category="pastries" data-tags="vegan gluten-free sugar-free dairy-free" data-bakery="Velvet Vegan Confections">
+                <img src="img/sugar_free_matcha_latte.png" alt="Zen Matcha Tart">
+                <div class="card-body menu-card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-v">Vegan</span>
+                        <span class="tag tag-gf">Gluten-Free</span>
+                        <span class="tag tag-sf">Sugar-Free</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--secondary); font-weight:700; margin-bottom:4px;"><i class="fas fa-store"></i> Velvet Vegan Confections</span>
+                    <h3>Zen Matcha Mousse Tart</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Ceremonial grade Uji matcha mousse inside a crisp almond-free tart shell, with edible gold leaf.</p>
+                    <div class="price menu-price">$18.00</div>
+                    <button type="button" class="btn btn-primary btn-customize-treat" data-product-id="p9" style="width: 100%;"><i class="fas fa-wand-magic-sparkles"></i> Customize &amp; Order</button>
+                </div>
+            </div>
+
+            <!-- Product 10 -->
+            <div class="card reveal" data-category="cakes" data-tags="gluten-free nut-free dairy-free" data-bakery="Pure Bliss Patisserie">
+                <img src="img/raspberry_almond_cake.png" alt="Raspberry Velvet Cake">
+                <div class="card-body menu-card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-gf">Gluten-Free</span>
+                        <span class="tag tag-nf">Nut-Free</span>
+                        <span class="tag tag-df">Dairy-Free</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--secondary); font-weight:700; margin-bottom:4px;"><i class="fas fa-store"></i> Pure Bliss Patisserie</span>
+                    <h3>Raspberry Velvet Dream Cake</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Moist vanilla bean sponge layered with tart organic raspberry reduction and dairy-free whip.</p>
+                    <div class="price menu-price">$26.00</div>
+                    <button type="button" class="btn btn-primary btn-customize-treat" data-product-id="p10" style="width: 100%;"><i class="fas fa-wand-magic-sparkles"></i> Customize &amp; Order</button>
+                </div>
+            </div>
+
+            <!-- Product 11 -->
+            <div class="card reveal" data-category="pastries" data-tags="gluten-free nut-free dairy-free" data-bakery="Sweet Haven GF Bakery">
+                <img src="img/gf_chocolate_brownies.png" alt="GF Belgian Brownies">
+                <div class="card-body menu-card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-gf">Gluten-Free</span>
+                        <span class="tag tag-nf">Nut-Free</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--secondary); font-weight:700; margin-bottom:4px;"><i class="fas fa-store"></i> Sweet Haven GF Bakery</span>
+                    <h3>Fudgy Belgian GF Brownies (4-Pk)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Dense, melt-in-your-mouth brownies crafted with 70% dark cocoa and a delicate crackly crust.</p>
+                    <div class="price menu-price">$15.00</div>
+                    <button type="button" class="btn btn-primary btn-customize-treat" data-product-id="p11" style="width: 100%;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 12 -->
+            <div class="card reveal" data-category="breads" data-tags="nut-free vegan gluten-free" data-bakery="Pure Bliss Patisserie">
+                <img src="img/nut_free_crackers.png" alt="Artisan Seed Crackers">
+                <div class="card-body menu-card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-nf">Nut-Free</span>
+                        <span class="tag tag-v">Vegan</span>
+                        <span class="tag tag-gf">Gluten-Free</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--secondary); font-weight:700; margin-bottom:4px;"><i class="fas fa-store"></i> Pure Bliss Patisserie</span>
+                    <h3>Savory Artisan Seed Crackers (Box)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Oven-toasted gourmet crackers packed with golden flax, pumpkin seeds, and aromatic herbs.</p>
+                    <div class="price menu-price">$8.50</div>
+                    <button type="button" class="btn btn-primary btn-customize-treat" data-product-id="p12" style="width: 100%;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 13 -->
+            <div class="card reveal" data-category="cakes" data-tags="vegan gluten-free nut-free dairy-free" data-bakery="Velvet Vegan Confections">
+                <img src="img/vegan_chocolate_avocado_cake.png" alt="Chocolate Avocado Gateau">
+                <div class="card-body menu-card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-v">Vegan</span>
+                        <span class="tag tag-gf">Gluten-Free</span>
+                        <span class="tag tag-nf">Nut-Free</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--secondary); font-weight:700; margin-bottom:4px;"><i class="fas fa-store"></i> Velvet Vegan Confections</span>
+                    <h3>Decadent Chocolate Avocado Gateau</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Luscious chocolate indulgence made with ripe avocados, raw cacao, and coconut cream frosting.</p>
+                    <div class="price menu-price">$27.00</div>
+                    <button type="button" class="btn btn-primary btn-customize-treat" data-product-id="p13" style="width: 100%;"><i class="fas fa-wand-magic-sparkles"></i> Customize &amp; Order</button>
+                </div>
+            </div>
+
+            <!-- Product 14 -->
+            <div class="card reveal" data-category="cookies" data-tags="vegan nut-free gluten-free" data-bakery="Flourish Safe Bakes">
+                <img src="img/Vegan Cookies.png" alt="Vanilla Bean Cookies">
+                <div class="card-body menu-card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-v">Vegan</span>
+                        <span class="tag tag-nf">Nut-Free</span>
+                        <span class="tag tag-gf">Gluten-Free</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--secondary); font-weight:700; margin-bottom:4px;"><i class="fas fa-store"></i> Flourish Safe Bakes</span>
+                    <h3>Classic Vanilla Bean Cookies (6-Pk)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Buttery, melt-in-the-mouth crumb infused with Madagascar vanilla bean caviar. 100% plant-based.</p>
+                    <div class="price menu-price">$12.50</div>
+                    <button type="button" class="btn btn-primary btn-customize-treat" data-product-id="p14" style="width: 100%;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 15 -->
+            <div class="card reveal" data-category="cookies" data-tags="gluten-free vegan nut-free" data-bakery="Sweet Haven GF Bakery">
+                <img src="img/Triple Choc Cookies.png" alt="Triple Cocoa Cookies">
+                <div class="card-body menu-card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-gf">Gluten-Free</span>
+                        <span class="tag tag-v">Vegan</span>
+                        <span class="tag tag-nf">Nut-Free</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--secondary); font-weight:700; margin-bottom:4px;"><i class="fas fa-store"></i> Sweet Haven GF Bakery</span>
+                    <h3>Triple Cocoa Crunch Cookies (6-Pk)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Deep dark chocolate batter loaded with white and dark dairy-free chips for pure chocolate bliss.</p>
+                    <div class="price menu-price">$14.00</div>
+                    <button type="button" class="btn btn-primary btn-customize-treat" data-product-id="p15" style="width: 100%;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 16 -->
+            <div class="card reveal" data-category="breads" data-tags="gluten-free vegan nut-free" data-bakery="Flourish Safe Bakes">
+                <img src="img/seeded morning.jpg" alt="Seeded Morning Loaf">
+                <div class="card-body menu-card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-gf">Gluten-Free</span>
+                        <span class="tag tag-v">Vegan</span>
+                        <span class="tag tag-nf">Nut-Free</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--secondary); font-weight:700; margin-bottom:4px;"><i class="fas fa-store"></i> Flourish Safe Bakes</span>
+                    <h3>Heritage Golden Seeded Morning Loaf</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Nutritious high-protein sandwich loaf loaded with chia, toasted sesame, and sunflower kernels.</p>
+                    <div class="price menu-price">$10.50</div>
+                    <button type="button" class="btn btn-primary btn-customize-treat" data-product-id="p16" style="width: 100%;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 17 -->
+            <div class="card reveal" data-category="pastries" data-tags="gluten-free nut-free dairy-free" data-bakery="Pure Bliss Patisserie">
+                <img src="img/WhatsApp Image 2026-04-10 at 3.21.19 PM (2).jpeg" alt="Wild Blueberry Muffins">
+                <div class="card-body menu-card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-gf">Gluten-Free</span>
+                        <span class="tag tag-nf">Nut-Free</span>
+                        <span class="tag tag-df">Dairy-Free</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--secondary); font-weight:700; margin-bottom:4px;"><i class="fas fa-store"></i> Pure Bliss Patisserie</span>
+                    <h3>Wild Blueberry Crumble Muffins (4-Pk)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Bursting with juicy wild Maine blueberries and topped with a buttery cinnamon oat streusel.</p>
+                    <div class="price menu-price">$15.50</div>
+                    <button type="button" class="btn btn-primary btn-customize-treat" data-product-id="p17" style="width: 100%;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 18 -->
+            <div class="card reveal" data-category="cookies" data-tags="sugar-free gluten-free vegan nut-free" data-bakery="Velvet Vegan Confections">
+                <img src="img/WhatsApp Image 2026-04-10 at 3.21.22 PM.jpeg" alt="Cinnamon Oat Snaps">
+                <div class="card-body menu-card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-sf">Sugar-Free</span>
+                        <span class="tag tag-gf">Gluten-Free</span>
+                        <span class="tag tag-v">Vegan</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--secondary); font-weight:700; margin-bottom:4px;"><i class="fas fa-store"></i> Velvet Vegan Confections</span>
+                    <h3>Cinnamon Spiced Oat Snaps (8-Pk)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Crunchy, aromatic Ceylon cinnamon cookies sweetened naturally with erythritol and monkfruit.</p>
+                    <div class="price menu-price">$9.00</div>
+                    <button type="button" class="btn btn-primary btn-customize-treat" data-product-id="p18" style="width: 100%;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="artisan-gift-section reveal">
+        <div class="container">
+            <div class="gift-banner">
+                <div class="gift-image">
+                    <img src="img/Gift box of.jpg" alt="Artisan Gift Box">
+                </div>
+                <div class="gift-info">
+                    <span class="subheading">The Gifting Experience</span>
+                    <h2>Sweet Moments, Safely Delivered</h2>
+                    <p>Share the joy with our signature curated gift boxes. Every collection is hand-picked, 100%
+                        allergen-friendly, and beautifully wrapped to make every occasion unforgettable.</p>
+                    <div class="gift-perks">
+                        <div class="perk"><i class="fas fa-heart"></i> Personal Notes</div>
+                        <div class="perk"><i class="fas fa-shipping-fast"></i> Safe Shipping</div>
+                        <div class="perk"><i class="fas fa-magic"></i> Custom Themes</div>
+                        <div class="perk"><i class="fas fa-leaf"></i> Eco-Packaging</div>
+                    </div>
+                    <div class="btn-wrapper" style="justify-content: flex-start;">
+                        <a href="contact.html" class="btn btn-primary">Build Your Gift Box</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col-brand" style="flex: 1.5;">
+                    <a href="index.html" class="footer-logo">
+                        <i class="fas fa-cookie-bite"></i> SafeCrust Co.
+                    </a>
+                    <p>Bringing you the finest allergy-friendly, gluten-free, and vegan treats. Baked with love and
+                        safety in mind.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p>123 Bakery Lane, London<br>Phone: +44 20 1234 5678<br>Email: hello@safecrust.com</p>
+                </div>
+                <div class="footer-col footer-follow-block">
+                    <h4>Follow Us</h4>
+                    <div class="footer-social">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 SafeCrust Co. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | SafeCrust Co. - Allergy Friendly Bakery</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .cart-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 1.5rem 2rem;
+        }
+
+        .cart-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .cart-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .cart-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .cart-items {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: var(--radius);
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .cart-item-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .quantity-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            color: var(--text-main);
+            transition: background-color 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background-color: var(--accent);
+        }
+
+        .quantity-input {
+            border: none;
+            width: 45px;
+            text-align: center;
+            font-weight: 600;
+            background: transparent;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 1.1rem;
+        }
+
+        .quantity-input::-webkit-outer-spin-button,
+        .quantity-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .quantity-input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .remove-item:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-summary {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 6rem;
+        }
+
+        .summary-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .summary-row.total {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            padding-top: 1rem;
+            border-top: 2px solid var(--border);
+            margin-top: 1rem;
+        }
+
+        .promo-code {
+            margin: 2rem 0;
+        }
+
+        .promo-input-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .promo-input {
+            flex: 1;
+            min-width: 0;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--bg-main);
+            color: var(--text-main);
+        }
+
+        .promo-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .promo-btn:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .checkout-btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .empty-cart-icon {
+            font-size: 4rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .empty-cart h2 {
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+
+        .empty-cart p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .continue-shopping {
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .continue-shopping:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 991.98px) {
+            .cart-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cart-summary {
+                position: static;
+                order: -1;
+            }
+
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cart-item-image {
+                width: 150px;
+                height: 150px;
+                margin: 0 auto;
+            }
+
+            .cart-item-details {
+                text-align: center;
+            }
+
+            .cart-item-quantity {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .cart-container {
+                padding: 6rem 1rem 2rem;
+            }
+
+            .promo-input-group {
+                flex-direction: column;
+            }
+
+            .promo-btn {
+                width: 100%;
+            }
+
+            .cart-header h1 {
+                font-size: 2rem;
+            }
+
+            /* Social Links Mobile */
+            .social-link {
+                font-size: 2rem !important;
+            }
+
+            .social-hashtag {
+                font-size: 0.8rem !important;
+                padding: 0.4rem 0.8rem !important;
+            }
+        }
+
+        /* Social Links Hover Effects */
+        .social-link:hover {
+            transform: scale(1.1) !important;
+        }
+
+        .social-hashtag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container nav-container">
+            <div class="mobile-nav-container">
+                <a href="index.html" class="logo"><i class="fas fa-cookie-bite"></i> SafeCrust Co.</a>
+                <button class="navbar-toggler" type="button" id="mobileMenuToggle" title="Open menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <nav>
+                <ul class="nav-links" id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="home-premium.html">Premium</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <button type="button" id="theme-toggle" class="toggle-btn" title="Toggle Theme"><i
+                        class="fas fa-moon"></i></button>
+                <button type="button" id="rtl-toggle" class="toggle-btn" title="Toggle RTL"><i
+                        class="fas fa-right-left"></i></button>
+                <button type="button" class="toggle-btn cart-btn" title="View Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge">0</span>
+                </button>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+        </div>
+
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+            <div class="mobile-menu-header">
+                <h3>Menu</h3>
+                <button type="button" class="mobile-menu-close" id="mobileMenuClose" title="Close menu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <ul class="mobile-menu-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="home-premium.html">Premium</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+
+            <div class="mobile-menu-actions">
+                <button type="button" id="mobile-theme-toggle" class="btn btn-outline">
+                    <i class="fas fa-moon"></i> Theme
+                </button>
+                <button type="button" id="mobile-rtl-toggle" class="btn btn-outline">
+                    <i class="fas fa-right-left"></i> RTL
+                </button>
+                <a href="cart.html" class="btn btn-primary">Cart</a>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+        </div>
+
+        <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+    </header>
+
+    <div class="cart-container">
+        <div class="cart-header">
+            <h1><i class="fas fa-shopping-cart"></i> Allergy-Friendly Basket &amp; Checkout</h1>
+            <p>Aggregated fresh from certified gluten-free, vegan &amp; nut-safe bakery kitchens</p>
+        </div>
+
+        <div id="cart-allergen-guard"></div>
+
+        <div class="cart-grid">
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items dynamically rendered by main.js -->
+            </div>
+
+            <div class="cart-summary">
+                <h2 class="summary-title" style="margin-bottom:1.5rem; color:var(--primary);"><i class="fas fa-receipt"></i> Order Summary</h2>
+
+                <div class="summary-row" style="display:flex; justify-content:space-between; margin-bottom:0.75rem;">
+                    <span>Basket Subtotal:</span>
+                    <span id="cart-subtotal" style="font-weight:700;">$0.00</span>
+                </div>
+
+                <div class="summary-row" id="cart-discount-row" style="display:none; justify-content:space-between; margin-bottom:0.75rem; color:#2e7d32; font-weight:700;">
+                    <span>Promo Discount:</span>
+                    <span id="cart-discount">-$0.00</span>
+                </div>
+
+                <div class="summary-row" style="display:flex; justify-content:space-between; margin-bottom:0.75rem;">
+                    <span>Express Delivery:</span>
+                    <span id="cart-delivery-fee" style="font-weight:700;">$3.99</span>
+                </div>
+
+                <div class="summary-row" style="display:flex; justify-content:space-between; margin-bottom:0.75rem;">
+                    <span>Estimated Tax (8%):</span>
+                    <span id="cart-tax" style="font-weight:700;">$0.00</span>
+                </div>
+
+                <div class="promo-code" style="margin:1.5rem 0;">
+                    <label for="promoCode" style="font-weight:700; font-size:0.85rem; display:block; margin-bottom:4px;">Have a Promo Code?</label>
+                    <div class="promo-input-group" style="display:flex; gap:8px;">
+                        <input type="text" id="promoCode" class="promo-input" placeholder="e.g. SAFECRUST20" style="flex:1; padding:0.6rem 0.8rem; border-radius:8px; border:1px solid var(--border); background:var(--bg-main); color:var(--text-main);">
+                        <button type="button" class="promo-btn">Apply</button>
+                    </div>
+                    <small style="color:var(--text-muted); font-size:0.75rem;">Try: <strong>SAFECRUST20</strong> (20% off) or <strong>FREEDELIVERY</strong></small>
+                </div>
+
+                <hr style="border:none; border-top:1px solid var(--border); margin:1rem 0;">
+
+                <div class="summary-row total" style="display:flex; justify-content:space-between; font-size:1.3rem; font-weight:700; color:var(--primary); margin-bottom:1.5rem;">
+                    <span>Grand Total:</span>
+                    <span id="cart-total">$0.00</span>
+                </div>
+
+                <button type="button" class="checkout-btn">
+                    <i class="fas fa-lock"></i> Proceed to Safe Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col-brand" style="flex: 1.5;">
+                    <a href="index.html" class="footer-logo">
+                        <i class="fas fa-cookie-bite"></i> SafeCrust Co.
+                    </a>
+                    <p>Bringing you the finest allergy-friendly, gluten-free, and vegan treats. Baked with love and
+                        safety in mind.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p>123 Bakery Lane, London<br>Phone: +44 20 1234 5678<br>Email: hello@safecrust.com</p>
+                </div>
+                <div class="footer-col footer-follow-block">
+                    <h4>Follow Us</h4>
+                    <div class="footer-social">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 SafeCrust Co. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

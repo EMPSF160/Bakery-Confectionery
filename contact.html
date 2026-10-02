@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | SafeCrust Co. - Get in Touch</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-header {
+            padding: 10rem 0;
+            background: linear-gradient(rgba(27, 14, 10, 0.5), rgba(27, 14, 10, 0.5)), url('img/menu header.png');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            position: relative;
+            margin-bottom: 5rem;
+        }
+
+        .page-header h1 {
+            color: #ffffff !important;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                margin-bottom: 3.5rem;
+            }
+        }
+
+        .contact-section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 4rem;
+            align-items: stretch;
+        }
+
+        @media (max-width: 992px) {
+            .contact-section-grid {
+                grid-template-columns: 1fr !important;
+                gap: 2rem;
+            }
+        }
+
+        [data-theme='dark'] .contact-details-box h3 {
+            color: white !important;
+        }
+
+        .contact-form {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: var(--bg-main);
+            color: var(--text-main);
+        }
+
+
+        .contact-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .wholesale-banner {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            border-radius: var(--radius);
+        }
+
+        /* Social Media Buttons Styling */
+        .social-connect {
+            margin-top: 2.5rem;
+            text-align: center;
+        }
+
+        .social-btns-wrap {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .social-icon-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            color: var(--primary);
+            font-size: 1.3rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            border: 1px solid var(--border);
+        }
+
+        .social-icon-btn:hover {
+            transform: translateY(-5px);
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(124, 62, 45, 0.2);
+        }
+
+        [data-theme='dark'] .social-icon-btn {
+            background: var(--bg-card);
+            border-color: var(--border);
+            color: var(--text-main);
+        }
+
+        [data-theme='dark'] .social-icon-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        @media (max-width: 991px) {
+            .social-connect {
+                text-align: center !important;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 2rem;
+            }
+            .social-btns-wrap {
+                justify-content: center;
+            }
+        }
+
+        /* Tablet & Mobile Specific Alignment - Flush Left as per user's 2nd screenshot */
+        @media (max-width: 767px) {
+            #contact-top-grid {
+                grid-template-columns: 1fr !important;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+            #contact-top-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                grid-auto-rows: 1fr !important;
+                max-width: 800px;
+                margin: 0 auto 3rem auto !important;
+                gap: 1.5rem !important;
+            }
+            #contact-top-grid > .card {
+                height: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+            }
+            #contact-top-grid > .card:nth-child(3) {
+                grid-column: 1 / span 2 !important;
+                justify-self: center !important;
+                width: calc(50% - 0.75rem) !important;
+            }
+        }
+
+        @media (max-width: 1024px) {
+
+            .contact-details-box {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                text-align: left !important;
+                padding: 2.5rem 1.5rem !important;
+            }
+
+            .contact-details-box > div,
+            #quick-support-wrapper {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .contact-details-box h3,
+            .contact-details-box > p {
+                text-align: left !important;
+                width: 100%;
+            }
+
+            .contact-info-row {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: flex-start !important;
+                text-align: left !important;
+                gap: 1.2rem !important;
+                margin: 0 0 2rem 0 !important;
+                width: 100% !important;
+            }
+
+            .contact-info-row > div:first-child {
+                margin: 0 !important;
+                flex-shrink: 0 !important;
+            }
+
+            .contact-info-row > div:last-child {
+                text-align: left !important;
+                margin: 0 !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                justify-content: center !important;
+            }
+
+            .contact-info-row h4,
+            .contact-info-row p {
+                text-align: left !important;
+                margin: 0 !important;
+                line-height: 1.4 !important;
+                display: block !important;
+                width: auto !important;
+            }
+            
+            .contact-form > h3 {
+                text-align: center !important;
+            }
+            .contact-form form label,
+            .contact-form form input,
+            .contact-form form textarea {
+                text-align: left !important;
+            }
+        }
+
+        .contact-card-icon {
+            display: none; /* Removed as per user request */
+        }
+
+        .card-location { 
+            border-top: 5px solid var(--primary) !important; 
+            background-color: #fdf8f6 !important; 
+        }
+        .card-phone { 
+            border-top: 5px solid var(--secondary) !important; 
+            background-color: #f7fcf7 !important; 
+        }
+        .card-hours { 
+            border-top: 5px solid #d4a84b !important; 
+            background-color: #fdfaf2 !important; 
+        }
+
+        .contact-top-grid h3 {
+            margin-top: 0.5rem;
+            color: var(--primary);
+        }
+
+        .card-hours h3 { color: #b8860b; }
+
+        /* Dark Mode Overrides for Contact Cards */
+        [data-theme='dark'] .card-location, 
+        [data-theme='dark'] .card-phone, 
+        [data-theme='dark'] .card-hours {
+            background-color: var(--bg-card) !important;
+            border-color: var(--border) !important;
+        }
+
+        [data-theme='dark'] .card-location h3,
+        [data-theme='dark'] .card-phone h3,
+        [data-theme='dark'] .card-hours h3 {
+            color: var(--text-main) !important;
+        }
+
+        [data-theme='dark'] .card-location p,
+        [data-theme='dark'] .card-phone p,
+        [data-theme='dark'] .card-hours p {
+            color: var(--text-muted) !important;
+        }
+
+        [data-theme='dark'] .card-location { border-top-color: var(--primary) !important; }
+        [data-theme='dark'] .card-phone { border-top-color: var(--secondary) !important; }
+        [data-theme='dark'] .card-hours { border-top-color: #f0c567 !important; }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container nav-container">
+            <div class="mobile-nav-container">
+                <a href="index.html" class="logo"><i class="fas fa-cookie-bite"></i> SafeCrust Co.</a>
+                <button class="navbar-toggler" type="button" id="mobileMenuToggle" title="Open menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <nav>
+                <ul class="nav-links" id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="home-premium.html">Premium</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <button type="button" id="theme-toggle" class="toggle-btn" title="Toggle Theme"><i
+                        class="fas fa-moon"></i></button>
+                <button type="button" id="rtl-toggle" class="toggle-btn" title="Toggle RTL"><i
+                        class="fas fa-right-left"></i></button>
+                <button type="button" class="toggle-btn cart-btn" title="View Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </button>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+        </div>
+
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+            <div class="mobile-menu-header">
+                <h3>Menu</h3>
+                <button type="button" class="mobile-menu-close" id="mobileMenuClose" title="Close menu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <ul class="mobile-menu-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="home-premium.html">Premium</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+
+            <div class="mobile-menu-actions">
+                <button type="button" id="mobile-theme-toggle" class="btn btn-outline">
+                    <i class="fas fa-moon"></i> Theme
+                </button>
+                <button type="button" id="mobile-rtl-toggle" class="btn btn-outline">
+                    <i class="fas fa-right-left"></i> RTL
+                </button>
+                <a href="cart.html" class="btn btn-primary">Cart</a>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+        </div>
+
+        <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+    </header>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Let's Get in Touch</h1>
+            <p>Have questions about allergens or custom orders? We're here to help.</p>
+        </div>
+    </div>
+
+    <main>
+        <section class="container section">
+            <div class="grid grid-3" id="contact-top-grid">
+                <div class="card reveal card-location">
+                    <div class="card-body">
+                        <h3>Our Location</h3>
+                        <p>123 Bakery Lane, London, UK</p>
+                    </div>
+                </div>
+                <div class="card reveal card-phone">
+                    <div class="card-body">
+                        <h3>Call Us</h3>
+                        <p>+44 20 1234 5678</p>
+                    </div>
+                </div>
+                <div class="card reveal card-hours">
+                    <div class="card-body">
+                        <h3>Opening Hours</h3>
+                        <p>Mon - Sat: 8am - 6pm<br>Sun: 9am - 4pm</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--bg-card);">
+            <div class="container contact-section-grid">
+                <!-- Related Section: Contact Info (Left Side) -->
+                <div class="reveal" style="display: flex; flex-direction: column; height: 100%;">
+                    <div class="contact-details-box"
+                        style="background: var(--accent); padding: 3rem; border-radius: var(--radius); height: 100%; border: 1px solid var(--border); position: relative; overflow: hidden;">
+                        <h3 style="text-align: left; margin-bottom: 1.5rem; color: var(--primary);">Quick Support</h3>
+                        <p style="margin-bottom: 2.5rem; color: var(--text-muted);">Have a specific question about
+                            allergens or a pending order? Our dedicated team is ready to assist you through any of these
+                            channels.</p>
+
+                        <div id="quick-support-wrapper" style="display: flex; flex-direction: column; gap: 2rem;">
+                            <div class="contact-info-row" style="display: flex; gap: 1.5rem; align-items: center;">
+                                <div
+                                    style="background: white; width: 55px; height: 55px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: var(--shadow); color: var(--primary); font-size: 1.4rem;">
+                                    <i class="fas fa-envelope-open-text"></i>
+                                </div>
+                                <div style="text-align: left !important; display: flex; flex-direction: column; align-items: flex-start;">
+                                    <h4
+                                        style="margin: 0; text-align: left !important; font-size: 1.1rem; color: var(--text-main);">
+                                        Email Correspondence</h4>
+                                    <p style="margin: 0; text-align: left !important; font-size: 0.95rem; color: var(--text-muted);">
+                                        support@safecrust.com</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-info-row" style="display: flex; gap: 1.5rem; align-items: center;">
+                                <div
+                                    style="background: white; width: 55px; height: 55px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: var(--shadow); color: var(--primary); font-size: 1.4rem;">
+                                    <i class="fas fa-phone-volume"></i>
+                                </div>
+                                <div style="text-align: left !important; display: flex; flex-direction: column; align-items: flex-start;">
+                                    <h4
+                                        style="margin: 0; text-align: left !important; font-size: 1.1rem; color: var(--text-main);">
+                                        Immediate Helpline</h4>
+                                    <p style="margin: 0; text-align: left !important; font-size: 0.95rem; color: var(--text-muted);">+44 20 1234 5678
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="contact-info-row" style="display: flex; gap: 1.5rem; align-items: center;">
+                                <div
+                                    style="background: white; width: 55px; height: 55px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: var(--shadow); color: var(--primary); font-size: 1.4rem;">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <div style="text-align: left !important; display: flex; flex-direction: column; align-items: flex-start;">
+                                    <h4
+                                        style="margin: 0; text-align: left !important; font-size: 1.1rem; color: var(--text-main);">
+                                        Live Chat Hours</h4>
+                                    <p style="margin: 0; text-align: left !important; font-size: 0.95rem; color: var(--text-muted);">Mon-Sat: 9am -
+                                        6pm</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div style="margin-top: auto; padding-top: 3rem;">
+                            <div
+                                style="background: var(--bg-card); padding: 1.5rem; border-radius: var(--radius); border-left: 4px solid var(--secondary);">
+                                <p style="font-size: 0.9rem; margin: 0; color: var(--text-main);"><strong>Note:</strong>
+                                    We prioritize inquiries related to severe allergies. Please mention this in your
+                                    message subject.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Send us a Message (Right Side) -->
+                <div class="contact-form reveal">
+                    <h3 style="margin-bottom: 2rem; text-align: left;">Send us a Message or Partner Application</h3>
+                    <form onsubmit="event.preventDefault(); showToast('Message sent! Our Allergen Support Team will reply within 2 hours.', 'success'); this.reset();">
+                        <div class="form-group">
+                            <label for="contact_name">Full Name</label>
+                            <input type="text" id="contact_name" name="name" placeholder="Your Name" required
+                                autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact_email">Email Address</label>
+                            <input type="email" id="contact_email" name="email" placeholder="you@example.com" required
+                                autocomplete="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact_reason">Inquiry Type</label>
+                            <select id="contact_reason" class="customizer-input" style="margin-bottom:1rem;">
+                                <option value="support">Customer Order / Allergen Verification Inquiry</option>
+                                <option value="partner">Join as Bakery Merchant Partner</option>
+                                <option value="custom">Custom Event Cake Request</option>
+                                <option value="driver">Courier Driver Fleet Application</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact_message">Message &amp; Dietary Requirements</label>
+                            <textarea id="contact_message" name="message" rows="4" required
+                                placeholder="Please describe your event date, severe allergies, or bakery details..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fas fa-paper-plane"></i> Send Inquiry</button>
+                    </form>
+
+                    <div class="social-connect" style="margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 2rem;">
+                        <h4 style="margin-bottom: 1.2rem; color: var(--primary); font-size: 1.15rem; font-weight: 700;">Join Our Community</h4>
+                        <div class="social-btns-wrap">
+                            <a href="#" class="social-icon-btn" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon-btn" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                            <a href="#" class="social-icon-btn" title="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                            <a href="#" class="social-icon-btn" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Section Below -->
+            <div class="container" style="margin-top: 4rem;">
+                <div class="reveal" style="width: 100%;">
+                    <h3 style="margin-bottom: 2rem; text-align: center;">Find Us</h3>
+                    <div class="map-embed-wrap" style="height: 500px; border: 1px solid var(--border);">
+                        <iframe title="SafeBakes bakery location map" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            src="https://www.google.com/maps?q=London+Bakery+Lane&output=embed">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="section section-faq-contact section-spacing-tablet-faq" style="background: var(--accent);">
+            <div class="container">
+                <h2> Frequently Asked Questions</h2>
+                <div class="faq-accordion" style="margin-top: 2rem;">
+                    <div class="faq-accordion-item">
+                        <button type="button" class="faq-accordion-trigger" aria-expanded="false">
+                            <span>Do you offer nut-free options?</span>
+                            <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                        </button>
+                        <div class="faq-accordion-panel">
+                            <div class="faq-accordion-panel-inner">Yes, we have a dedicated nut-free line, although some
+                                products are made in the same facility with strict protocols.</div>
+                        </div>
+                    </div>
+                    <div class="faq-accordion-item">
+                        <button type="button" class="faq-accordion-trigger" aria-expanded="false">
+                            <span>Can I order a custom cake with 24h notice?</span>
+                            <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                        </button>
+                        <div class="faq-accordion-panel">
+                            <div class="faq-accordion-panel-inner">We typically require 48-72h for custom orders to
+                                ensure the safest ingredients are sourced.</div>
+                        </div>
+                    </div>
+                    <div class="faq-accordion-item">
+                        <button type="button" class="faq-accordion-trigger" aria-expanded="false">
+                            <span>Do you ship internationally?</span>
+                            <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                        </button>
+                        <div class="faq-accordion-panel">
+                            <div class="faq-accordion-panel-inner">Currently we ship within the UK. We are working on EU
+                                shipping soon!</div>
+                        </div>
+                    </div>
+                    <div class="faq-accordion-item">
+                        <button type="button" class="faq-accordion-trigger" aria-expanded="false">
+                            <span>How should I store my treats?</span>
+                            <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                        </button>
+                        <div class="faq-accordion-panel">
+                            <div class="faq-accordion-panel-inner">Most bakes stay fresh for 3 days in an airtight
+                                container at room temperature.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col-brand" style="flex: 1.5;">
+                    <a href="index.html" class="footer-logo">
+                        <i class="fas fa-cookie-bite"></i> SafeCrust Co.
+                    </a>
+                    <p>Bringing you the finest allergy-friendly, gluten-free, and vegan treats. Baked with love and
+                        safety in mind.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p>123 Bakery Lane, London<br>Phone: +44 20 1234 5678<br>Email: hello@safecrust.com</p>
+                </div>
+                <div class="footer-col footer-follow-block">
+                    <h4>Follow Us</h4>
+                    <div class="footer-social">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 SafeCrust Co. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

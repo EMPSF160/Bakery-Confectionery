@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | SafeCrust Co.</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .auth-main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 1rem 3rem;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 450px;
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: var(--bg-main);
+            color: var(--text-main);
+            font-size: 1rem;
+            height: 52px;
+            /* Set fixed height for consistency */
+        }
+
+        .form-group-input {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary);
+        }
+
+        .social-login {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.25rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-wrapper {
+            margin-bottom: 0.5rem !important;
+        }
+
+        .social-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--bg-card);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .auth-footer {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .terms-row {
+            text-align: left;
+            font-size: 0.9rem;
+            margin: 1rem 0 1.5rem;
+            line-height: 1.5;
+        }
+
+        .terms-row label {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+            /* Better for multi-line text */
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .terms-row input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .form-group-input input {
+            padding-right: 3rem !important;
+            /* Space for eye icon */
+        }
+
+        body.auth-page-standalone {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--bg-main);
+            padding-top: 0 !important;
+        }
+
+        .auth-floating-controls {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1000;
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        [dir="rtl"] .auth-floating-controls {
+            right: auto;
+            left: 1rem;
+        }
+
+        /* Mobile & Tablet Specific Optimization (Up to 1024px) */
+        @media (max-width: 1024px) {
+            .auth-card, 
+            .auth-card * {
+                text-align: left !important;
+            }
+
+            .auth-card .card-body h1 {
+                text-align: center !important;
+                font-size: 1.75rem !important;
+                margin-bottom: 1.5rem !important;
+                margin-left: 0;
+            }
+
+            .auth-card .logo {
+                justify-content: center !important;
+                font-size: 1.75rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            .auth-footer {
+                text-align: center !important;
+            }
+
+            .social-login {
+                justify-content: center !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .auth-main {
+                padding: 4rem 0.75rem 2rem;
+            }
+
+            .auth-card {
+                padding: 2rem 1.25rem;
+                box-shadow: none;
+                /* Cleaner on small screens */
+                border: none;
+            }
+
+            .form-group label {
+                font-size: 0.9rem;
+            }
+
+            .social-login {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .social-btn {
+                width: 100%;
+            }
+
+            .password-toggle {
+                right: 0.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="auth-page-standalone">
+
+    <div class="auth-floating-controls">
+        <button type="button" id="theme-toggle" class="toggle-btn" title="Toggle Theme"><i
+                class="fas fa-moon"></i></button>
+        <button type="button" id="rtl-toggle" class="toggle-btn" title="Toggle RTL"><i
+                class="fas fa-right-left"></i></button>
+    </div>
+
+    <main class="auth-main">
+        <div class="auth-card" style="max-width:500px;">
+            <a href="index.html" class="logo"
+                style="justify-content: center; margin-bottom: 1.5rem; font-size: 2rem; display: inline-flex; width: 100%;">
+                <i class="fas fa-cookie-bite"></i> SafeCrust Co.
+            </a>
+            <div class="card-body">
+                <h1 style="margin-bottom: 1rem; font-size: 1.8rem;">Create SafeCrust Account</h1>
+
+                <div style="display:flex; background:var(--bg-main); padding:4px; border-radius:25px; border:1px solid var(--border); margin-bottom:1.5rem; gap:4px;">
+                    <button type="button" class="btn btn-primary" id="reg-type-customer" style="flex:1; padding:6px; font-size:0.8rem; border-radius:20px;" onclick="switchRegType('customer')">Customer Account</button>
+                    <button type="button" class="btn btn-outline" id="reg-type-partner" style="flex:1; padding:6px; font-size:0.8rem; border-radius:20px;" onclick="switchRegType('partner')">Bakery Partner</button>
+                </div>
+
+                <form onsubmit="handleRegistration(event)">
+                    <div class="form-group">
+                        <label for="reg_name">Full Name / Primary Contact</label>
+                        <input type="text" id="reg_name" name="name" placeholder="e.g. Emily Watson" required autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg_email">Email Address</label>
+                        <input type="email" id="reg_email" name="email" placeholder="you@example.com" required autocomplete="email">
+                    </div>
+
+                    <!-- Bakery Specific Fields -->
+                    <div id="partner-extra-fields" style="display:none;">
+                        <div class="form-group">
+                            <label for="reg_bakery_name">Bakery Kitchen Brand Name</label>
+                            <input type="text" id="reg_bakery_name" placeholder="e.g. Pure Bliss Patisserie">
+                        </div>
+                        <div class="form-group">
+                            <label for="reg_cert_num">Allergen Safety / ISO Certification #</label>
+                            <input type="text" id="reg_cert_num" placeholder="e.g. GFCO-90214-CERT">
+                        </div>
+                    </div>
+
+                    <!-- Customer Specific Allergen Selection -->
+                    <div id="customer-extra-fields">
+                        <div class="form-group" style="text-align:left;">
+                            <label style="display:block; margin-bottom:6px;">Select Your Dietary &amp; Allergen Profile</label>
+                            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                                <label style="background:var(--bg-main); border:1px solid var(--border); padding:4px 10px; border-radius:15px; font-size:0.8rem; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:4px;">
+                                    <input type="checkbox" checked id="allergy-gf"> Gluten-Free
+                                </label>
+                                <label style="background:var(--bg-main); border:1px solid var(--border); padding:4px 10px; border-radius:15px; font-size:0.8rem; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:4px;">
+                                    <input type="checkbox" checked id="allergy-v"> 100% Vegan
+                                </label>
+                                <label style="background:var(--bg-main); border:1px solid var(--border); padding:4px 10px; border-radius:15px; font-size:0.8rem; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:4px;">
+                                    <input type="checkbox" id="allergy-nf"> Peanut &amp; Nut-Free
+                                </label>
+                                <label style="background:var(--bg-main); border:1px solid var(--border); padding:4px 10px; border-radius:15px; font-size:0.8rem; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:4px;">
+                                    <input type="checkbox" id="allergy-df"> Dairy-Free
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg_password">Password</label>
+                        <div class="form-group-input">
+                            <input type="password" id="reg_password" name="password" placeholder="Create a password" required autocomplete="new-password">
+                            <i class="fas fa-eye password-toggle" title="Show password"></i>
+                        </div>
+                    </div>
+
+                    <div class="terms-row">
+                        <label>
+                            <input type="checkbox" name="terms" required checked>
+                            <span>I agree to SafeCrust Co. <a href="#">Terms &amp; Allergen Isolation Policy</a>.</span>
+                        </label>
+                    </div>
+
+                    <div class="btn-wrapper">
+                        <button type="submit" class="btn btn-primary" style="width: 100%;" id="reg-submit-btn">
+                            Create Customer Account
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div style="margin-top: 1rem; position: relative;">
+                <hr style="border: 0; border-top: 1px solid var(--border);">
+                <span
+                    style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--bg-card); padding: 0 1rem; color: var(--text-muted); font-size: 0.8rem;">OR</span>
+            </div>
+
+            <div class="social-login">
+                <button type="button" class="social-btn" onclick="switchDemoRole('customer')" title="Sign up with Google"><i class="fab fa-google"></i>
+                    Google</button>
+                <button type="button" class="social-btn" onclick="switchDemoRole('customer')" title="Sign up with Apple"><i class="fab fa-apple"></i>
+                    Apple</button>
+            </div>
+
+            <div class="auth-footer">
+                Already have an account? <a href="login.html">Login</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentRegType = 'customer';
+        function switchRegType(type) {
+            currentRegType = type;
+            const custBtn = document.getElementById('reg-type-customer');
+            const partBtn = document.getElementById('reg-type-partner');
+            const custFields = document.getElementById('customer-extra-fields');
+            const partFields = document.getElementById('partner-extra-fields');
+            const submitBtn = document.getElementById('reg-submit-btn');
+
+            if (type === 'customer') {
+                custBtn.className = 'btn btn-primary';
+                partBtn.className = 'btn btn-outline';
+                custFields.style.display = 'block';
+                partFields.style.display = 'none';
+                submitBtn.textContent = 'Create Customer Account';
+            } else {
+                custBtn.className = 'btn btn-outline';
+                partBtn.className = 'btn btn-primary';
+                custFields.style.display = 'none';
+                partFields.style.display = 'block';
+                submitBtn.textContent = 'Register Bakery Kitchen Partner';
+            }
+        }
+
+        function handleRegistration(e) {
+            e.preventDefault();
+            const name = document.getElementById('reg_name').value;
+            const email = document.getElementById('reg_email').value;
+
+            if (currentRegType === 'customer') {
+                switchDemoRole('customer');
+            } else {
+                switchDemoRole('partner');
+            }
+            showToast('Account registered successfully! Welcome to SafeCrust Co.', 'success');
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 800);
+        }
+    </script>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

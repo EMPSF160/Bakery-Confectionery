@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeCrust Co. | Certified Allergy-Friendly Bakery & Confectionery Aggregator</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Home Specific Styles */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 620px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            background: #14120E;
+        }
+
+        .hero-video-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(20, 18, 14, 0.65) 0%, rgba(20, 18, 14, 0.4) 50%, rgba(20, 18, 14, 0.85) 100%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 880px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 3.8rem;
+            color: #ffffff !important;
+            margin-bottom: 1.25rem;
+            line-height: 1.15;
+            font-weight: 700;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.35rem;
+            color: rgba(255, 255, 255, 0.92);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            line-height: 1.6;
+        }
+
+
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .steps-grid-modern {
+            text-align: center;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .steps-grid-modern {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                gap: 1.5rem !important;
+            }
+
+            .steps-grid-modern > * {
+                width: calc(50% - 0.75rem) !important;
+                flex: 0 0 auto !important;
+            }
+        }
+
+
+        /* Pure Ingredients Image Alignment */
+        .pure-ingredients-home .card {
+            padding-top: 0;
+            padding-left: 0;
+            padding-right: 0;
+            overflow: hidden;
+        }
+
+        .pure-ingredients-home .card-img-wrap {
+            width: 100%;
+            height: 250px;
+            margin-bottom: 1.5rem;
+        }
+
+        .pure-ingredients-home .card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+            margin: 0;
+        }
+
+        .pure-ingredients-home .card-body {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        /* How It Works Image Alignment */
+        .section-how-it-works .step-card {
+            padding: 0 !important;
+            overflow: hidden;
+        }
+
+        .section-how-it-works .step-card-icon-wrap {
+            margin-bottom: 1.5rem !important;
+            height: 220px !important;
+            border-radius: 0 !important;
+            overflow: hidden;
+        }
+
+        .section-how-it-works .step-card-icon-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .section-how-it-works .step-card h3,
+        .section-how-it-works .step-card p {
+            padding: 0 1.5rem;
+        }
+
+        .section-how-it-works .step-card p {
+            padding-bottom: 1.5rem;
+        }
+
+        /* Modern Editorial Blog & Recipe Cards */
+        .blog-section-modern {
+            padding: 6rem 0;
+            background: var(--bg-main);
+        }
+
+        .blog-header-box {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 3.5rem;
+        }
+
+        .blog-subtitle-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .blog-modern-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .blog-card-modern {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        .blog-card-modern:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255, 196, 0, 0.12), 0 10px 25px rgba(0, 0, 0, 0.06);
+        }
+
+        .blog-card-img-wrap {
+            position: relative;
+            height: 240px;
+            overflow: hidden;
+            background: #14120E;
+        }
+
+        .blog-card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .blog-card-modern:hover .blog-card-img-wrap img {
+            transform: scale(1.08);
+        }
+
+        .blog-badge-category {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: var(--primary);
+            color: #1C1917 !important;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+            text-transform: uppercase;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .blog-badge-time {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #ffffff;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .blog-card-content {
+            padding: 1.75rem 1.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            text-align: left;
+        }
+
+        .blog-meta-author-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .blog-author-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .blog-card-title {
+            font-size: 1.25rem !important;
+            font-weight: 800 !important;
+            color: var(--text-main) !important;
+            margin: 0 0 0.75rem 0 !important;
+            line-height: 1.35;
+            text-align: left !important;
+            transition: color 0.3s ease;
+        }
+
+        .blog-card-modern:hover .blog-card-title {
+            color: var(--primary) !important;
+        }
+
+        .blog-card-desc {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+            flex: 1;
+            text-align: left !important;
+        }
+
+        .blog-dietary-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 1.25rem;
+        }
+
+        .blog-diet-pill {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 12px;
+            background: var(--accent);
+            color: var(--primary-text);
+            border: 1px solid var(--border);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .blog-card-footer-action {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+            margin-top: auto;
+        }
+
+        .blog-action-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            transition: gap 0.3s ease;
+        }
+
+        .blog-card-modern:hover .blog-action-link {
+            gap: 12px;
+        }
+
+        .blog-bookmark-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .blog-bookmark-btn:hover {
+            background: var(--accent);
+            color: var(--primary);
+            border-color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 1024px) {
+            .blog-modern-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .blog-modern-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* New Promise Section Styles */
+        .promise-section {
+            background-color: var(--accent) !important;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        [data-theme='dark'] .promise-section {
+            background-color: #2D2A28 !important;
+        }
+
+        .promise-grid {
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .promise-card {
+            background: var(--bg-card);
+            padding: 0 !important;
+            /* Remove padding for edge-to-edge image */
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            /* Left align for content container logic */
+            text-align: center;
+        }
+
+        .promise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            z-index: 2;
+        }
+
+        .promise-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .promise-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .promise-img-wrap {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+
+        .promise-img-wrap img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            /* Forces image to fill without gaps */
+            border-radius: 0;
+            margin: 0;
+            display: block;
+        }
+
+        .promise-content {
+            padding: 2rem 1.5rem 2.5rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .promise-card h3 {
+            font-size: 1.5rem !important;
+            margin-bottom: 1rem !important;
+            color: var(--primary) !important;
+            text-align: center !important;
+        }
+
+        [data-theme='dark'] .promise-card h3 {
+            color: var(--text-main) !important;
+        }
+
+        .promise-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 1024px) and (min-width: 601px) {
+            .promise-grid {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                gap: 1.5rem !important;
+            }
+
+            .promise-grid > * {
+                width: calc(50% - 0.75rem) !important;
+                flex: 0 0 auto !important;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .promise-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 0 1rem;
+            }
+
+            .promise-card {
+                padding: 0 !important;
+            }
+        }
+
+        /* Pure Ingredients 1024px Fix */
+        @media only screen and (min-width: 1024px) and (max-width: 1024px) {
+            .pure-ingredients-home .grid-4 {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+
+            .pure-ingredients-home .card {
+                display: flex !important;
+                flex-direction: column !important;
+                height: 100% !important;
+            }
+
+            .pure-ingredients-home .card-body {
+                display: flex !important;
+                flex-direction: column !important;
+                flex: 1 !important;
+            }
+
+            .pure-ingredients-home .card-body .btn {
+                margin-top: auto !important;
+            }
+        }
+
+        /* Artisan Video Showcase Section - No Overlap Fix */
+        .artisan-video-section {
+            padding: 5rem 0;
+            overflow: hidden;
+        }
+
+        .artisan-video-banner {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+            gap: 3.5rem;
+            align-items: center;
+            background: linear-gradient(135deg, #1C1917 0%, #292524 100%);
+            border-radius: 28px;
+            padding: 3rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .artisan-video-banner > * {
+            min-width: 0;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .video-container-wrap {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+            width: 100%;
+            max-width: 100%;
+            aspect-ratio: 16 / 10;
+            height: auto;
+            background: #000;
+            display: block;
+        }
+
+        .showcase-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-overlay-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.4) 100%);
+            pointer-events: none;
+        }
+
+        .artisan-video-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            min-width: 0;
+        }
+
+        .video-stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            margin-top: 1.5rem;
+        }
+
+        .video-stat {
+            text-align: left;
+            min-width: 0;
+        }
+
+        .video-stat h3 {
+            color: var(--primary) !important;
+            font-size: 1.85rem !important;
+            margin: 0 !important;
+            font-weight: 800;
+            text-align: left !important;
+        }
+
+        .video-stat p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.82rem;
+            margin: 0.25rem 0 0;
+            line-height: 1.3;
+        }
+
+        @media (max-width: 1100px) {
+            .artisan-video-banner {
+                grid-template-columns: 1fr;
+                padding: 2.5rem 2rem;
+                gap: 2.5rem;
+            }
+            .artisan-video-content h2 {
+                font-size: 2.2rem !important;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .artisan-video-banner {
+                padding: 1.75rem 1.25rem;
+                border-radius: 20px;
+                gap: 1.75rem;
+            }
+            .artisan-video-content h2 {
+                font-size: 1.85rem !important;
+            }
+            .video-stats-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        /* Chef Reel & Daily Stories Section */
+        .chef-reel-section {
+            padding: 6rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+
+        .chef-reel-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+            gap: 4.5rem;
+            align-items: center;
+        }
+
+        .chef-reel-grid > * {
+            min-width: 0;
+            box-sizing: border-box;
+        }
+
+        .reel-video-col {
+            display: flex;
+            justify-content: center;
+        }
+
+        .reel-phone-frame {
+            position: relative;
+            width: 320px;
+            height: 568px;
+            border-radius: 36px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35), 0 0 0 6px var(--border);
+            background: #000;
+        }
+
+        .reel-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .reel-live-tag {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #ffffff;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 2;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #e53935;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 0 rgba(229, 57, 53, 0.7);
+            animation: pulse 1.6s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(229, 57, 53, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 8px rgba(229, 57, 53, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(229, 57, 53, 0);
+            }
+        }
+
+        .reel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 24px 18px 18px;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.88) 100%);
+            text-align: left;
+            z-index: 2;
+        }
+
+        .reel-features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .reel-feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            text-align: left;
+        }
+
+        .reel-feature-item strong {
+            color: var(--text-main);
+            display: block;
+            font-size: 1.05rem;
+            margin-bottom: 2px;
+        }
+
+        @media (max-width: 991px) {
+            .chef-reel-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .reel-content-col h2 {
+                font-size: 2rem !important;
+                text-align: center !important;
+            }
+            .reel-content-col p,
+            .reel-content-col span {
+                text-align: center !important;
+            }
+            .reel-features-list {
+                max-width: 480px;
+                margin: 0 auto;
+            }
+            .reel-content-col .btn-wrapper {
+                justify-content: center !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container nav-container">
+            <div class="mobile-nav-container">
+                <a href="index.html" class="logo"><i class="fas fa-cookie-bite"></i> SafeCrust Co.</a>
+                <button class="navbar-toggler" type="button" id="mobileMenuToggle" title="Open menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <nav>
+                <ul class="nav-links" id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="home-premium.html">Premium</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+
+                <button type="button" id="theme-toggle" class="toggle-btn" title="Toggle Theme"><i
+                        class="fas fa-moon"></i></button>
+                <button type="button" id="rtl-toggle" class="toggle-btn" title="Toggle RTL"><i
+                        class="fas fa-right-left"></i></button>
+                <button type="button" class="toggle-btn cart-btn" title="View Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge">0</span>
+                </button>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+            <div class="mobile-menu-header">
+                <h3>Menu</h3>
+                <button type="button" class="mobile-menu-close" id="mobileMenuClose" title="Close Menu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <ul class="mobile-menu-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="home-premium.html">Premium</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+
+            <div class="mobile-menu-actions">
+                <button id="mobile-theme-toggle" class="btn btn-outline">
+                    <i class="fas fa-moon"></i> Theme
+                </button>
+                <button id="mobile-rtl-toggle" class="btn btn-outline">
+                    <i class="fas fa-right-left"></i> RTL
+                </button>
+                <a href="cart.html" class="btn btn-primary">Cart</a>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Backdrop -->
+        <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <video class="hero-video-bg" autoplay muted loop playsinline poster="img/home 1 page header background image.png">
+                <source src="img/V/13944562_1920_1080_25fps.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <span style="background:rgba(255,255,255,0.18); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); color:#ffffff; padding:6px 18px; border-radius:25px; font-size:0.9rem; font-weight:700; display:inline-block; margin-bottom:1rem; border:1px solid rgba(255,255,255,0.35); box-shadow:0 4px 15px rgba(0,0,0,0.2);">
+                    <i class="fas fa-shield-virus" style="color:var(--primary);"></i> Certified Allergy-Safe Bakery Aggregator
+                </span>
+                <h1>Deliciously Safe, Naturally Made</h1>
+                <p>Order fresh from top certified gluten-free, vegan &amp; nut-free artisan patisseries. Express 30-min Hot-Bake Delivery with real-time GPS tracking.</p>
+                <div class="hero-buttons">
+                    <a href="menu.html" class="btn btn-primary"><i class="fas fa-utensils"></i> Order Fresh Bakes</a>
+                    <a href="dashboard.html" class="btn btn-outline" style="border-color: #ffffff; color: #ffffff;"><i class="fas fa-motorcycle"></i> Live Dispatch Tracker</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="container section pure-ingredients-home">
+            <h2> Pure Ingredients</h2>
+            <div class="grid grid-4">
+                <div class="card reveal">
+                    <div class="card-img-wrap">
+                        <img src="img/WhatsApp Image 2026-04-10 at 3.21.17 PM.jpeg" alt="Gluten-Free Cake">
+                    </div>
+                    <div class="card-body">
+                        <h3>Gluten-Free Cakes</h3>
+                        <p>Moist, rich, and completely safe for gluten-sensitive lovers.</p>
+                        <a href="menu.html" class="btn btn-primary" style="width: 100%;">View More</a>
+                    </div>
+                </div>
+                <div class="card reveal">
+                    <div class="card-img-wrap">
+                        <img src="img/Vegan Cookies.png" alt="Vegan Cookie">
+                    </div>
+                    <div class="card-body">
+                        <h3>Vegan Cookies</h3>
+                        <p>Plant-based goodness that melts in your mouth.</p>
+                        <a href="menu.html" class="btn btn-primary" style="width: 100%;">View More</a>
+                    </div>
+                </div>
+                <div class="card reveal">
+                    <div class="card-img-wrap">
+                        <img src="img/WhatsApp Image 2026-04-10 at 3.21.19 PM.jpeg" alt="Dairy-Free Dessert">
+                    </div>
+                    <div class="card-body">
+                        <h3>Dairy-Free Desserts</h3>
+                        <p>Creamy and delicious without a drop of dairy.</p>
+                        <a href="menu.html" class="btn btn-primary" style="width: 100%;">View More</a>
+                    </div>
+                </div>
+                <div class="card reveal">
+                    <div class="card-img-wrap">
+                        <img src="img/WhatsApp Image 2026-04-10 at 3.21.20 PM.jpeg" alt="Healthy Bread">
+                    </div>
+                    <div class="card-body">
+                        <h3>Healthy Breads</h3>
+                        <p>Freshly baked artisanal breads with zero allergens.</p>
+                        <a href="menu.html" class="btn btn-primary" style="width: 100%;">View More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-how-it-works" style="background: var(--bg-card);">
+            <div class="container">
+                <h2> How It Works</h2>
+                <div class="steps-grid-modern">
+                    <div class="step-card step-card-visual reveal">
+                        <div class="step-card-icon-wrap">
+                            <img src="img/Choose Ingredients.png" alt="Choosing fresh ingredients" loading="lazy">
+                        </div>
+                        <h3>Choose Ingredients</h3>
+                        <p>We source clean, transparent ingredients you can trust for every bake.</p>
+                    </div>
+                    <div class="step-card step-card-visual reveal">
+                        <div class="step-card-icon-wrap">
+                            <img src="img/Bake_with_Care.png" alt="Baking with Care" loading="lazy">
+                        </div>
+                        <h3>Bake with Care</h3>
+                        <p>Dedicated equipment and timed batches keep flavors bold and allergens out.</p>
+                    </div>
+                    <div class="step-card step-card-visual reveal">
+                        <div class="step-card-icon-wrap">
+                            <img src="img/Delivered Fresh.png" alt="Fresh delivery at your door" loading="lazy">
+                        </div>
+                        <h3>Delivered Fresh</h3>
+                        <p>Packed safely and brought to your door—ready to enjoy.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Artisan Video Showcase Section -->
+        <section class="artisan-video-section">
+            <div class="container">
+                <div class="artisan-video-banner reveal">
+                    <div class="video-container-wrap">
+                        <video class="showcase-video" autoplay muted loop playsinline poster="img/home 2 page header image.png">
+                            <source src="img/V/15115066_2560_1440_30fps.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-overlay-gradient"></div>
+                    </div>
+                    <div class="artisan-video-content">
+                        <span style="color: var(--primary); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem; display: block; margin-bottom: 0.75rem;">
+                            <i class="fas fa-shield-halved" style="color: var(--primary);"></i> Behind SafeCrust Co.
+                        </span>
+                        <h2 style="text-align: left !important; font-size: 2.6rem; margin-bottom: 1.25rem; color: #ffffff !important; line-height: 1.2;">
+                            Crafted with Passion. Tested for Safety.
+                        </h2>
+                        <p style="text-align: left !important; font-size: 1.05rem; color: rgba(255, 255, 255, 0.9); line-height: 1.75; margin-bottom: 1.5rem;">
+                            Step into our certified, isolated patisserie kitchens. Watch our master bakers craft delicate celiac-safe boules, plant-based pastries, and rich allergen-free confections using small-batch artisanal methods and state-of-the-art ELISA allergen safety screening.
+                        </p>
+                        <div class="video-stats-row">
+                            <div class="video-stat">
+                                <h3>100%</h3>
+                                <p>Dedicated Facility</p>
+                            </div>
+                            <div class="video-stat">
+                                <h3>&lt; 5 ppm</h3>
+                                <p>Lab Swab Verified</p>
+                            </div>
+                            <div class="video-stat">
+                                <h3>30 min</h3>
+                                <p>Hot-Bake Dispatch</p>
+                            </div>
+                        </div>
+                        <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <a href="menu.html" class="btn btn-primary"><i class="fas fa-bag-shopping"></i> Explore Menu</a>
+                            <a href="about.html" class="btn btn-outline" style="border-color: #ffffff; color: #ffffff;"><i class="fas fa-microscope"></i> Safety Standards</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="promise-section">
+            <div class="container">
+                <span
+                    style="color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 1rem;">Why
+                    Choose Us</span>
+                <h2 style="margin-bottom: 1rem;">The SafeCrust Promise</h2>
+                <p style="max-width: 600px; margin: 0 auto 3rem; color: var(--text-muted);">We believe everyone deserves
+                    a seat at the table. Here’s how we ensure every bite is safe, delicious, and uncompromisingly
+                    high-quality.</p>
+
+                <div class="promise-grid">
+                    <div class="promise-card reveal">
+                        <div class="promise-img-wrap">
+                            <img src="img/Isolated Production.png" alt="Isolated Production">
+                        </div>
+                        <div class="promise-content">
+                            <h3>100% Dedicated Facility</h3>
+                            <p>Zero risk of cross-contamination. Our bakery is strictly gluten-free and dairy-free,
+                                ensuring total peace of mind for severe allergies.</p>
+                        </div>
+                    </div>
+
+                    <div class="promise-card reveal">
+                        <div class="promise-img-wrap">
+                            <img src="img/Choose Ingredients.png" alt="Premium Ingredients">
+                        </div>
+                        <div class="promise-content">
+                            <h3>Clean-Label Ingredients</h3>
+                            <p>We source only non-GMO, organic, and whole-food ingredients. No artificial colors,
+                                preservatives, or hidden fillers—just pure goodness.</p>
+                        </div>
+                    </div>
+
+                    <div class="promise-card reveal">
+                        <div class="promise-img-wrap">
+                            <img src="img/Master Craftsmen.png" alt="Artisan Quality">
+                        </div>
+                        <div class="promise-content">
+                            <h3>Artisan Craftsmanship</h3>
+                            <p>Every product is handcrafted in small batches by masters of allergy-friendly baking to
+                                ensure artisanal texture and rich, authentic flavor.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chef Live Reel & Daily Stories Section -->
+        <section class="chef-reel-section">
+            <div class="container">
+                <div class="chef-reel-grid reveal">
+                    <div class="reel-video-col">
+                        <div class="reel-phone-frame">
+                            <video class="reel-video" autoplay muted loop playsinline poster="img/Double Chocolate Fudge.png">
+                                <source src="img/V/15213487_1080_1920_30fps.mp4" type="video/mp4">
+                            </video>
+                            <div class="reel-live-tag">
+                                <span class="pulse-dot"></span> LIVE FROM THE PATISSERIE
+                            </div>
+                            <div class="reel-caption">
+                                <div style="font-weight: 800; font-size: 1rem; color: #ffffff;">Chef Marcel Laurent</div>
+                                <div style="font-size: 0.8rem; color: var(--primary); font-weight: 700;">Gluten-Free &amp; Vegan Master Patissier</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reel-content-col">
+                        <span style="color: var(--primary); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem; display: block; margin-bottom: 0.75rem;">
+                            <i class="fas fa-video" style="color: var(--primary);"></i> Daily Artisan Stories
+                        </span>
+                        <h2 style="text-align: left !important; font-size: 2.5rem; margin-bottom: 1.25rem;">
+                            Fresh Small Batches, Baked &amp; Sealed Every Morning
+                        </h2>
+                        <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.75; margin-bottom: 1.5rem;">
+                            Every single loaf, cupcake, and pastry in our aggregator is recorded in transparent, real-time safety logs. Watch how our bakers maintain zero-gluten surfaces, measure organic flours, and pack orders in tamper-evident sealed boxes.
+                        </p>
+                        
+                        <div class="reel-features-list">
+                            <div class="reel-feature-item">
+                                <i class="fas fa-check-circle" style="color: var(--secondary); font-size: 1.35rem; margin-top: 3px;"></i>
+                                <div>
+                                    <strong>Daily Morning Swab Testing</strong>
+                                    <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted);">Work surfaces sanitized and lateral-flow swab tested before every batch.</p>
+                                </div>
+                            </div>
+                            <div class="reel-feature-item">
+                                <i class="fas fa-check-circle" style="color: var(--secondary); font-size: 1.35rem; margin-top: 3px;"></i>
+                                <div>
+                                    <strong>Single-Origin Certified Flours</strong>
+                                    <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted);">Certified gluten-free oat, almond-free tigernut, and sprouted tapioca.</p>
+                                </div>
+                            </div>
+                            <div class="reel-feature-item">
+                                <i class="fas fa-check-circle" style="color: var(--secondary); font-size: 1.35rem; margin-top: 3px;"></i>
+                                <div>
+                                    <strong>Direct Express Delivery in 30 Mins</strong>
+                                    <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted);">Dispatched warm in thermally isolated EV courier compartments.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 2rem;">
+                            <a href="menu.html" class="btn btn-primary"><i class="fas fa-utensils"></i> Order Today's Fresh Bakes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modern Editorial Blog & Recipes Section -->
+        <section class="blog-section-modern">
+            <div class="container">
+                <div class="blog-header-box reveal">
+                    <span class="blog-subtitle-chip">
+                        <i class="fas fa-feather-pointed"></i> SafeCrust Kitchen Journal
+                    </span>
+                    <h2>Artisan Recipes &amp; Allergy-Safe Guides</h2>
+                    <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                        Discover chef secrets, tested small-batch recipes, and essential living tips from our certified allergy specialists.
+                    </p>
+                </div>
+
+                <div class="blog-modern-grid">
+                    <!-- Article 1 -->
+                    <article class="blog-card-modern reveal">
+                        <div class="blog-card-img-wrap">
+                            <img src="img/WhatsApp Image 2026-04-10 at 3.22.24 PM.jpeg" alt="5-Ingredient Gluten-Free Brownies" loading="lazy">
+                            <span class="blog-badge-category">
+                                <i class="fas fa-cookie"></i> Secret Recipe
+                            </span>
+                            <span class="blog-badge-time">
+                                <i class="far fa-clock"></i> 15 Min Prep
+                            </span>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-meta-author-row">
+                                <span class="blog-author-tag"><i class="fas fa-user-circle" style="color: var(--primary);"></i> Chef Marcel L.</span>
+                                <span><i class="far fa-calendar-alt"></i> Oct 2, 2026</span>
+                            </div>
+                            <h3 class="blog-card-title">5-Ingredient Fudgy Celiac Brownies</h3>
+                            <p class="blog-card-desc">
+                                Master our bakery-grade cocoa crumb at home. Made exclusively with single-origin Dutch cacao, organic avocado butter, and zero refined sugars.
+                            </p>
+                            <div class="blog-dietary-pills">
+                                <span class="blog-diet-pill"><i class="fas fa-check"></i> Gluten-Free</span>
+                                <span class="blog-diet-pill"><i class="fas fa-seedling"></i> 100% Vegan</span>
+                                <span class="blog-diet-pill"><i class="fas fa-heart"></i> Dairy-Free</span>
+                            </div>
+                            <div class="blog-card-footer-action">
+                                <a href="menu.html" class="blog-action-link">
+                                    <span>Get The Recipe</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                                <button type="button" class="blog-bookmark-btn" title="Bookmark Recipe">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Article 2 -->
+                    <article class="blog-card-modern reveal">
+                        <div class="blog-card-img-wrap">
+                            <img src="img/WhatsApp Image 2026-04-10 at 3.22.26 PM.jpeg" alt="Artisan Allergy-Safe Loaf" loading="lazy">
+                            <span class="blog-badge-category">
+                                <i class="fas fa-bread-slice"></i> Masterclass
+                            </span>
+                            <span class="blog-badge-time">
+                                <i class="far fa-clock"></i> 6 Min Read
+                            </span>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-meta-author-row">
+                                <span class="blog-author-tag"><i class="fas fa-user-circle" style="color: var(--primary);"></i> Dr. Aris Thorne</span>
+                                <span><i class="far fa-calendar-alt"></i> Sep 28, 2026</span>
+                            </div>
+                            <h3 class="blog-card-title">The Science of Allergen-Free Sourdough</h3>
+                            <p class="blog-card-desc">
+                                Unlocking the chemistry of natural wild fermentation without wheat gluten. How activated wild yeast and tapioca starch create a crisp golden crust.
+                            </p>
+                            <div class="blog-dietary-pills">
+                                <span class="blog-diet-pill"><i class="fas fa-shield-virus"></i> &lt;5ppm Tested</span>
+                                <span class="blog-diet-pill"><i class="fas fa-ban"></i> Nut-Free</span>
+                                <span class="blog-diet-pill"><i class="fas fa-check"></i> Gut-Healthy</span>
+                            </div>
+                            <div class="blog-card-footer-action">
+                                <a href="menu.html" class="blog-action-link">
+                                    <span>Read Masterclass</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                                <button type="button" class="blog-bookmark-btn" title="Bookmark Article">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Article 3 -->
+                    <article class="blog-card-modern reveal">
+                        <div class="blog-card-img-wrap">
+                            <img src="img/WhatsApp Image 2026-04-10 at 3.21.28 PM (1).jpeg" alt="Living Allergy-Free Health Tips" loading="lazy">
+                            <span class="blog-badge-category">
+                                <i class="fas fa-heart-pulse"></i> Health Guide
+                            </span>
+                            <span class="blog-badge-time">
+                                <i class="far fa-clock"></i> 4 Min Read
+                            </span>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-meta-author-row">
+                                <span class="blog-author-tag"><i class="fas fa-user-circle" style="color: var(--primary);"></i> Elena Brooks RD</span>
+                                <span><i class="far fa-calendar-alt"></i> Sep 24, 2026</span>
+                            </div>
+                            <h3 class="blog-card-title">Navigating Severe Food Allergies Confidently</h3>
+                            <p class="blog-card-desc">
+                                10 essential life-hacks for dining out safely, decoding hidden label additives, and stocking a 100% cross-contamination-free home pantry.
+                            </p>
+                            <div class="blog-dietary-pills">
+                                <span class="blog-diet-pill"><i class="fas fa-leaf"></i> Clean Living</span>
+                                <span class="blog-diet-pill"><i class="fas fa-shield"></i> Cross-Contact Free</span>
+                                <span class="blog-diet-pill"><i class="fas fa-apple-whole"></i> Nutrition</span>
+                            </div>
+                            <div class="blog-card-footer-action">
+                                <a href="menu.html" class="blog-action-link">
+                                    <span>Explore Guide</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                                <button type="button" class="blog-bookmark-btn" title="Bookmark Guide">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--accent);">
+            <div class="container" style="text-align: center;">
+                <h2> Order your healthy treats today</h2>
+                <p style="margin-bottom: 2rem;">Safe, delicious, and delivered right to you.</p>
+                <a href="menu.html" class="btn btn-primary btn-lg">Order Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col-brand">
+                    <a href="index.html" class="footer-logo">
+                        <i class="fas fa-cookie-bite"></i> SafeCrust Co.
+                    </a>
+                    <p>Bringing you the finest allergy-friendly, gluten-free, and vegan treats. Baked with love and
+                        safety in mind.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p>123 Bakery Lane, London<br>Phone: +44 20 1234 5678<br>Email: hello@safecrust.com</p>
+                </div>
+                <div class="footer-col footer-follow-block">
+                    <h4>Follow Us</h4>
+                    <div class="footer-social">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 SafeCrust Co. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
