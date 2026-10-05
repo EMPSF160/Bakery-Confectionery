@@ -348,14 +348,71 @@
         .blog-diet-pill {
             font-size: 0.72rem;
             font-weight: 700;
-            padding: 3px 9px;
+            padding: 4px 10px;
             border-radius: 12px;
-            background: var(--accent);
-            color: var(--primary-text);
-            border: 1px solid var(--border);
+            background: #FFF8E1;
+            color: #78350F;
+            border: 1px solid #FDE68A;
             display: inline-flex;
             align-items: center;
             gap: 4px;
+        }
+
+        /* Night theme high-contrast support for Kitchen Journal */
+        [data-theme='dark'] .blog-section-modern {
+            background: var(--bg-main);
+        }
+
+        [data-theme='dark'] .blog-card-modern {
+            background: #1E1B16;
+            border-color: #3D372B;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme='dark'] .blog-card-modern:hover {
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255, 196, 0, 0.15), 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        [data-theme='dark'] .blog-card-title {
+            color: #FFFFFF !important;
+        }
+
+        [data-theme='dark'] .blog-card-modern:hover .blog-card-title {
+            color: var(--primary) !important;
+        }
+
+        [data-theme='dark'] .blog-card-desc {
+            color: #E2DDD5 !important;
+        }
+
+        [data-theme='dark'] .blog-meta-author-row {
+            color: #BDB7AB !important;
+        }
+
+        [data-theme='dark'] .blog-author-tag {
+            color: #FFFFFF !important;
+        }
+
+        [data-theme='dark'] .blog-diet-pill {
+            background: rgba(255, 196, 0, 0.15) !important;
+            color: #FFE082 !important;
+            border: 1px solid rgba(255, 196, 0, 0.35) !important;
+        }
+
+        [data-theme='dark'] .blog-card-footer-action {
+            border-top: 1px solid #3D372B !important;
+        }
+
+        [data-theme='dark'] .blog-bookmark-btn {
+            color: #D6D1C7 !important;
+            border-color: #3D372B !important;
+        }
+
+        [data-theme='dark'] .blog-bookmark-btn:hover {
+            background: #2C261A !important;
+            color: var(--primary) !important;
+            border-color: var(--primary) !important;
         }
 
         .blog-card-footer-action {

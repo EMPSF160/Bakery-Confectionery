@@ -29,10 +29,16 @@
         }
 
         .stats-section {
-            background-color: var(--primary);
-            color: white;
+            background: #1C1917 !important;
+            color: #FDFBF7 !important;
             padding: 5rem 0;
             text-align: center;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        [data-theme='dark'] .stats-section {
+            background: #100E0B !important;
         }
 
         .stats-grid {
@@ -42,14 +48,25 @@
         }
 
         .stat-item h2 {
-            color: white;
+            color: #FFC400 !important;
             margin-bottom: 0.5rem;
-            font-size: 3rem;
+            font-size: 3.2rem;
+            font-weight: 800;
         }
 
         .stat-item p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+            font-size: 1.15rem;
+            color: #FDFBF7 !important;
+            font-weight: 600;
+            opacity: 0.95;
+            margin: 0;
+        }
+
+        .premium-section-title {
+            color: #FFC400 !important;
+            text-align: center;
+            font-weight: 800;
+            margin-bottom: 2rem;
         }
 
         .category-filter {
@@ -385,13 +402,12 @@
 
         <section class="section">
             <div class="container" style="text-align: center;">
-                <div class="card reveal" style="background: var(--primary); color: white; padding: 4rem;">
-                    <div class="card-body">
-                        <h2 style="color: white;">Eat healthy without compromise</h2>
-                        <p style="margin: 1.5rem 0 2.5rem; font-size: 1.2rem;">Join our subscription and get fresh
-                            allergy-friendly bakes every week.</p>
-                        <div class="btn-wrapper">
-                            <a href="plans.html" class="btn btn-secondary btn-lg">View Subscriptions</a>
+                <div class="card reveal" style="background: linear-gradient(135deg, #1C1917 0%, #2A241D 100%); color: #FDFBF7; padding: 4rem 2rem; border-radius: 24px; border: 1px solid var(--border); box-shadow: var(--shadow-lg);">
+                    <div class="card-body" style="text-align: center; max-width: 650px; margin: 0 auto;">
+                        <h2 style="color: #FFC400 !important; font-size: 2.25rem; margin-bottom: 1rem;">Eat healthy without compromise</h2>
+                        <p style="margin: 0 0 2rem; font-size: 1.2rem; color: #E5E0D8 !important; line-height: 1.6;">Join our subscription and get fresh allergy-friendly bakes every week.</p>
+                        <div class="btn-wrapper" style="justify-content: center;">
+                            <a href="plans.html" class="btn btn-primary btn-lg"><i class="fas fa-box-open"></i> View Subscriptions</a>
                         </div>
                     </div>
                 </div>

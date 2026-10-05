@@ -1474,21 +1474,21 @@ function renderDashboardRoleView() {
         let badgeColor = user.role === 'admin' ? '#D97706' : user.role === 'partner' ? '#FFC400' : user.role === 'driver' ? '#2563eb' : '#2e7d32';
         roleBanner.innerHTML = `
             <div style="background:var(--bg-card); border-left:4px solid ${badgeColor}; padding:1rem 1.25rem; border-radius:var(--radius); box-shadow:var(--shadow); display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
-                <div style="display:flex; align-items:center; gap:12px;">
-                    <div style="background:${badgeColor}; color:white; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.1rem;">
+                <div style="display:flex; align-items:center; gap:12px; flex:1 1 240px; min-width:0;">
+                    <div style="background:${badgeColor}; color:white; width:40px; height:40px; min-width:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">
                         <i class="fas ${user.role === 'admin' ? 'fa-user-shield' : user.role === 'partner' ? 'fa-store' : user.role === 'driver' ? 'fa-motorcycle' : 'fa-user'}"></i>
                     </div>
-                    <div>
-                        <h4 style="margin:0; font-size:1.05rem; color:var(--text-main); text-align:start;">Viewing Mode: ${user.roleTitle || 'Customer'}</h4>
+                    <div style="min-width:0;">
+                        <h4 style="margin:0; font-size:1.05rem; color:var(--text-main); text-align:start; word-break:break-word;">Viewing Mode: ${user.roleTitle || 'Customer'}</h4>
                         <p style="margin:0; font-size:0.8rem; color:var(--text-muted); text-align:start;">Simulating active workspace controls and workflow permissions</p>
                     </div>
                 </div>
-                <div style="display:flex; gap:8px; align-items:center;">
-                    <span style="font-size:0.8rem; color:var(--text-muted);">Quick Switch:</span>
-                    <button class="btn btn-outline" style="padding:4px 10px; font-size:0.75rem;" onclick="switchDemoRole('customer')">Customer</button>
-                    <button class="btn btn-outline" style="padding:4px 10px; font-size:0.75rem;" onclick="switchDemoRole('partner')">Bakery Owner</button>
-                    <button class="btn btn-outline" style="padding:4px 10px; font-size:0.75rem;" onclick="switchDemoRole('admin')">Super Admin</button>
-                    <button class="btn btn-outline" style="padding:4px 10px; font-size:0.75rem;" onclick="switchDemoRole('driver')">Courier Driver</button>
+                <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap; width:100%; max-width:480px;">
+                    <span style="font-size:0.8rem; color:var(--text-muted); width:100%; margin-bottom:2px;">Quick Switch Mode:</span>
+                    <button class="btn btn-outline" style="padding:5px 8px; font-size:0.75rem; flex:1 1 calc(50% - 6px); min-width:105px; justify-content:center;" onclick="switchDemoRole('customer')">Customer</button>
+                    <button class="btn btn-outline" style="padding:5px 8px; font-size:0.75rem; flex:1 1 calc(50% - 6px); min-width:105px; justify-content:center;" onclick="switchDemoRole('partner')">Bakery Owner</button>
+                    <button class="btn btn-outline" style="padding:5px 8px; font-size:0.75rem; flex:1 1 calc(50% - 6px); min-width:105px; justify-content:center;" onclick="switchDemoRole('admin')">Super Admin</button>
+                    <button class="btn btn-outline" style="padding:5px 8px; font-size:0.75rem; flex:1 1 calc(50% - 6px); min-width:105px; justify-content:center;" onclick="switchDemoRole('driver')">Courier Driver</button>
                 </div>
             </div>
         `;
@@ -1507,40 +1507,40 @@ function renderLiveOrdersTab() {
 
     if (liveTrackerContainer) {
         liveTrackerContainer.innerHTML = `
-            <div style="background:var(--bg-card); border-radius:var(--radius); border:1px solid var(--border); padding:2rem; margin-bottom:2rem; box-shadow:var(--shadow);">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem; border-bottom:1px solid var(--border); padding-bottom:1rem;">
+            <div style="background:var(--bg-card); border-radius:var(--radius); border:1px solid var(--border); padding:1.5rem 1.25rem; margin-bottom:2rem; box-shadow:var(--shadow);">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; margin-bottom:1.25rem; border-bottom:1px solid var(--border); padding-bottom:1rem;">
                     <div>
-                        <span style="background:var(--accent); color:var(--primary); font-weight:700; font-size:0.8rem; padding:4px 10px; border-radius:20px; display:inline-block; margin-bottom:6px;">LIVE DISPATCH #${activeOrder.orderId}</span>
-                        <h3 style="margin:0; font-size:1.3rem; color:var(--primary); text-align:start;">${activeOrder.bakery} &bull; Express Hot-Bake</h3>
+                        <span style="background:var(--accent); color:var(--primary); font-weight:700; font-size:0.75rem; padding:3px 8px; border-radius:20px; display:inline-block; margin-bottom:4px;">LIVE DISPATCH #${activeOrder.orderId}</span>
+                        <h3 style="margin:0; font-size:1.15rem; color:var(--primary); text-align:start;">${activeOrder.bakery} &bull; Express Hot-Bake</h3>
                     </div>
                     <div style="text-align:end;">
-                        <span style="font-size:0.85rem; color:var(--text-muted); display:block;">Estimated Arrival</span>
-                        <span style="font-size:1.4rem; font-weight:700; color:var(--secondary);">${activeOrder.eta}</span>
+                        <span style="font-size:0.8rem; color:var(--text-muted); display:block;">Estimated Arrival</span>
+                        <span style="font-size:1.25rem; font-weight:700; color:var(--secondary);">${activeOrder.eta}</span>
                     </div>
                 </div>
 
                 <!-- Interactive Stepper -->
-                <div class="order-stepper" style="display:grid; grid-template-columns:repeat(5, 1fr); gap:8px; margin:2rem 0; position:relative;">
+                <div class="order-stepper" style="display:grid; grid-template-columns:repeat(5, 1fr); gap:6px; margin:1.5rem 0; position:relative;">
                     ${renderStepItem(1, 'Order Placed', 'fa-receipt', activeOrder.progressPct >= 20)}
                     ${renderStepItem(2, 'In Oven (375°F)', 'fa-fire-burner', activeOrder.progressPct >= 40)}
-                    ${renderStepItem(3, 'Lab Allergen Swab', 'fa-vial-circle-check', activeOrder.progressPct >= 60)}
-                    ${renderStepItem(4, 'Courier Dispatched', 'fa-motorcycle', activeOrder.progressPct >= 80)}
-                    ${renderStepItem(5, 'Safely Delivered', 'fa-house-circle-check', activeOrder.progressPct >= 100)}
+                    ${renderStepItem(3, 'Lab Swab Pass', 'fa-vial-circle-check', activeOrder.progressPct >= 60)}
+                    ${renderStepItem(4, 'Dispatched', 'fa-motorcycle', activeOrder.progressPct >= 80)}
+                    ${renderStepItem(5, 'Delivered', 'fa-house-circle-check', activeOrder.progressPct >= 100)}
                 </div>
 
                 <!-- Simulation Map Graphic -->
-                <div style="background:linear-gradient(135deg, #1C1917, #292524); border-radius:12px; padding:1.5rem; color:white; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
-                    <div style="display:flex; align-items:center; gap:15px;">
-                        <div style="width:45px; height:45px; border-radius:50%; background:#2563eb; display:flex; align-items:center; justify-content:center; font-size:1.3rem; animation:pulse 2s infinite;">
+                <div style="background:linear-gradient(135deg, #1C1917, #292524); border-radius:12px; padding:1.25rem 1rem; color:white; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+                    <div style="display:flex; align-items:center; gap:12px; min-width:0; flex:1 1 200px;">
+                        <div style="width:42px; height:42px; min-width:42px; border-radius:50%; background:#2563eb; display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0;">
                             <i class="fas fa-truck-fast"></i>
                         </div>
-                        <div>
-                            <h4 style="margin:0; color:white; font-size:1rem; text-align:start;">Driver: ${activeOrder.driverName || 'Alex Rivera (#402)'}</h4>
-                            <p style="margin:0; font-size:0.8rem; color:#a8a29e; text-align:start;">Sterile insulated box &bull; 0.8 miles away on Oak Avenue</p>
+                        <div style="min-width:0;">
+                            <h4 style="margin:0; color:white; font-size:0.95rem; text-align:start; word-break:break-word;">Driver: ${activeOrder.driverName || 'Alex Rivera (#402)'}</h4>
+                            <p style="margin:0; font-size:0.75rem; color:#a8a29e; text-align:start; word-break:break-word;">Sterile insulated box &bull; 0.8 miles away</p>
                         </div>
                     </div>
-                    <div style="display:flex; gap:8px;">
-                        <button type="button" class="btn btn-outline" style="color:white; border-color:#57534e; padding:6px 14px; font-size:0.85rem;" onclick="simulateAdvanceOrder()"><i class="fas fa-forward-step"></i> Advance Simulation Stage</button>
+                    <div style="display:flex; gap:8px; width:100%;">
+                        <button type="button" class="btn btn-outline" style="color:white; border-color:#57534e; padding:6px 12px; font-size:0.8rem; width:100%; justify-content:center;" onclick="simulateAdvanceOrder()"><i class="fas fa-forward-step"></i> Advance Simulation Stage</button>
                     </div>
                 </div>
             </div>
